@@ -34,3 +34,7 @@ function relight(img, pt, imgRefA, ptRefA)
    
     pt(:,1)=pt(:,1)-left;
     pt(:,2)=pt(:,2)-up;
+    
+    light_maskA = wls_filter(imgRefA,pt);
+    light_mask = wls_filter(img_crop(:,:,3),pt);
+end
