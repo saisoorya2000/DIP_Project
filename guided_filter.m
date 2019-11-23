@@ -1,18 +1,24 @@
-function q = guided_filter(I,P,w)
+function q = guided_filter(I,p,w)
 if(nargin<3)
-    w=7;
+    w=10;
 end
 
-mu_i = imfilter(I,fspecial('average',w),'symmetric');
-mu_ii = imfilter(I.^2,fspecial('average',w),'symmetric');
+[hei, wid] = size(I);
+N = boxfilter(ones(hei, wid), w); % the size of each local patch; N=(2r+1)^2 except for boundary pixels.
 
-sig_i = mu_ii - mu_i.^2;
+mean_I = boxfilter(I, w) ./ N;
+mean_p = boxfilter(p, w) ./ N;
+mean_Ip = boxfilter(I.*p, w) ./ N;
+cov_Ip = mean_Ip - mean_I .* mean_p; % this is the covariance of (I, p) in each local patch.
 
-mu_ip = imfilter(I.*P,fspecial('average',w),'symmetric');
-mu_p = imfilter(P,fspecial('average',w),'symmetric');
-mu_i_mu_p = mu_i.*mu_p;
+mean_II = boxfilter(I.*I, w) ./ N;
+var_I = mean_II - mean_I .* mean_I;
 
-ak = (mu_ip - mu_i_mu_p)./(sig_i);
-bk = mu_p - ak.*mu_i;
+a = cov_Ip ./ (var_I + eps);
+b = mean_p - a .* mean_I; 
 
-q = ak.*I  + bk;
+mean_a = boxfilter(a, w) ./ N;
+mean_b = boxfilter(b, w) ./ N;
+
+q = mean_a .* I + mean_b; 
+end

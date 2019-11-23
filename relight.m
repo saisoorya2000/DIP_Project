@@ -21,8 +21,10 @@ function relight(img, pt, imgRefA, ptRefA)
     up = max(find(ypro>0, 1 )-margin, 0); down = min(find(ypro>0, 1, 'last' )+margin, size(mask, 1));
     rect = [left, up, right-left+1, down-up+1];
     
+    % croping the rectangular portion from the mask 
     mask = imcrop(mask, rect);
     
+    % we move from rgb to hsv color space and apply the mask on it.
     imgRefA = imcrop(imgRefA, rect).*mask; 
     hsv_image = rgb2hsv(imcrop(img, rect));
     hsv_image(:,:,1) = hsv_image(:,:,1).*mask;
@@ -37,4 +39,11 @@ function relight(img, pt, imgRefA, ptRefA)
     
     light_maskA = wls_filter(imgRefA,pt);
     light_mask = wls_filter(img_crop(:,:,3),pt);
+    
+    % guided filter
+    light_maskNew = guided_filter(light_mask,light_maskA);
+    light_maskNew(isnan(light_maskNew))=0;
+    light_maskNew = light_maskNew./(light_mask+0.001);
+    hsv_image(:,:,3) = light_maskNew.*hsv_image(:,:,3).*mask;
+
 end
