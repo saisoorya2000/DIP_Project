@@ -13,6 +13,10 @@ Relit result on numerous target and reference face images with different lightin
 
 ## How To Run the Code
 
+Download the Zip File or clone repo using 'git clone'
+
+* Run demo.m using Matlab(atleast with 2018 version) 
+* For New Images add the Images and landmark points file to the data Folder, and in *[demo.m](https://github.com/saisoorya2000/DIP_Project/blob/master/demo.m)* you can add new source and reference to respective sets.
 
 ## Project features
 
@@ -40,3 +44,9 @@ Those input/testing images are gathered from research paper mentioned.
 
 ### ss1-ref1
 ![](https://github.com/saisoorya2000/DIP_Project/blob/master/results/Storage%20Data/ss1_ref1.jpg)
+### ss1-ref4
+![](https://github.com/saisoorya2000/DIP_Project/blob/master/results/Storage%20Data/ss1_ref4.jpg)
+### ss3-ref2
+![](https://github.com/saisoorya2000/DIP_Project/blob/master/results/Storage%20Data/ss3_ref2.jpg)
+### ss3-ref4
+![](https://github.com/saisoorya2000/DIP_Project/blob/master/results/Storage%20Data/ss3_ref4.jpg)
