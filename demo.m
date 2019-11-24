@@ -27,13 +27,13 @@ for i=1:3
                 shape ...
                 );
 
-        % Display Results
-        figure(4*(i-1)+j);
-        subplot(131);imshow(img);title('Source');
-        subplot(132);imshow(imgA);title('Reference');
-        subplot(133);imshow(results);title('Output');
+%         Display Results
+%         figure(4*(i-1)+j);
+%         subplot(131);imshow(img);title('Source');
+%         subplot(132);imshow(imgA);title('Reference');
+%         subplot(133);imshow(results);title('Output');
 
         % Saving Result
-        imwrite(results,char(strcat(source_name(i),'_',ref_name(j),'_ours.png')));
+        imwrite(results,char(strcat('results/',source_name(i),'_',ref_name(j),'_ours.png')));
     end
 end
