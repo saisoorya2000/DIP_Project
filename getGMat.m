@@ -38,10 +38,6 @@ indsGy1=indsGy1(1:indy);
 indsGy2=indsGy2(1:indy);
 valsGy=valsGy(1:indy);
 
-
-
 Gx=sparse(indsGx1,indsGx2,valsGx,imgSize,imgSize);
 Gy=sparse(indsGy1,indsGy2,valsGy,imgSize,imgSize);
-
-Gx(1,1)
-w,h,
+end

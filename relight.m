@@ -1,5 +1,5 @@
-
-function relight(img, pt, imgRefA, ptRefA)
+ 
+function results = relight(img, pt, imgRefA, ptRefA)
     % morphing the reference images
     scaleA = max(size(img,1)/size(imgRefA,1),size(img,2)/size(imgRefA,2));
     imgRefA = imresize(imgRefA, scaleA);    
@@ -45,5 +45,7 @@ function relight(img, pt, imgRefA, ptRefA)
     light_maskNew(isnan(light_maskNew))=0;
     light_maskNew = light_maskNew./(light_mask+0.001);
     hsv_image(:,:,3) = light_maskNew.*hsv_image(:,:,3).*mask;
-
+    
+    results = zeros(size(img));
+    results(rect(2)-1 +(1:size(hsv_image,1)),rect(1)-1+(1:size(hsv_image,2)),:)=hsv2rgb(hsv_image);
 end
